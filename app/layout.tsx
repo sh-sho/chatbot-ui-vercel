@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Toaster } from 'sonner';
 
 import { ThemeProvider } from '@/components/theme-provider';
+import { Providers } from "./providers"; // 先ほど作成したSessionProvider用コンポーネント
 
 import './globals.css';
 
@@ -57,6 +58,7 @@ export default async function RootLayout({
         />
       </head>
       <body className="antialiased">
+      <Providers>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -66,6 +68,7 @@ export default async function RootLayout({
           <Toaster position="top-center" />
           {children}
         </ThemeProvider>
+      </Providers>
       </body>
     </html>
   );
