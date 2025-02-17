@@ -9,6 +9,9 @@ declare module "next-auth" {
         // 既存の型 (DefaultSession) を継承しつつ、
         // 任意のプロパティを追加したい場合はここで宣言
         accessToken?: string;
+        user: {
+            id: string;
+          } & DefaultSession["user"];
     }
 
     /**
@@ -19,5 +22,6 @@ declare module "next-auth" {
         accessToken?: string;
         refreshToken?: string;
         expiresAt?: number;
+        id?: string;
     }
 }

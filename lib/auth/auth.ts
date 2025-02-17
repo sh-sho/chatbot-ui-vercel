@@ -24,14 +24,19 @@ export const authOptions: NextAuthOptions = {
             token.accessToken = account.access_token;
             token.refreshToken = account.refresh_token;
             token.expiresAt = account.expires_at;
+            token.id = account.sub;
         }
         return token;
         },
         async session({ session, token }) {
         // sessionオブジェクトにアクセストークンを格納し、フロントから参照できるように
-        if (token?.accessToken) {
-            session.accessToken = token.accessToken as string;
-        }
+        // if (token?.accessToken) {
+        //     session.accessToken = token.accessToken as string;
+        // }
+        if (session.user) {
+            // JWT に格納した id を session.user に追加
+            session.user.id = token.id as string;
+          }
         return session;
         },
     },
