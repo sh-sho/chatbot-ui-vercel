@@ -1,5 +1,7 @@
 import type { NextAuthOptions } from "next-auth"
+import jwt from 'jsonwebtoken'
 import AzureADProvider from "next-auth/providers/azure-ad"
+
 
 // NextAuth の設定オプション
 export const authOptions: NextAuthOptions = {
@@ -26,6 +28,7 @@ export const authOptions: NextAuthOptions = {
             token.expiresAt = account.expires_at;
             token.id = account.sub;
         }
+        console.log("accout_test: ", account)
         return token;
         },
         async session({ session, token }) {
@@ -33,9 +36,16 @@ export const authOptions: NextAuthOptions = {
         // if (token?.accessToken) {
         //     session.accessToken = token.accessToken as string;
         // }
+        // console.log("token_test: ", token)
+        // console.log("session_test: ", session.user)
+        
+        const token_id = jwt.decode(token.accessToken as string)
         if (session.user) {
             // JWT に格納した id を session.user に追加
-            session.user.id = token.id as string;
+            // session.user.id = token.sub as string;
+            if (token_id && typeof token_id === 'object' && 'oid' in token_id) {
+                session.user.id = token_id.oid as string;
+              }
           }
         return session;
         },
