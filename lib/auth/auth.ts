@@ -28,8 +28,6 @@ export const authOptions: NextAuthOptions = {
             token.expiresAt = account.expires_at;
             token.id = account.sub;
         }
-        // console.log("accout_test: ", account)
-        // console.log("token_test: ", token)
         return token;
         },
         async session({ session, token }) {

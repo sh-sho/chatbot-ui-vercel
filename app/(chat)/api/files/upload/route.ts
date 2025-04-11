@@ -51,12 +51,14 @@ export async function POST(request: Request) {
     // Get filename from formData since Blob doesn't have name property
     const filename = (formData.get('file') as File).name;
     const fileBuffer = await file.arrayBuffer();
+    console.log('File name:', filename);
 
     try {
+      console.log('Uploading file...');
       const data = await put(`${filename}`, fileBuffer, {
         access: 'public',
       });
-
+      console.log('File uploaded successfully:', data);
       return NextResponse.json(data);
     } catch (error) {
       return NextResponse.json({ error: 'Upload failed' }, { status: 500 });

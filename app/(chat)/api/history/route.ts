@@ -5,7 +5,7 @@ import { getChatsByUserId } from '@/lib/db/queries';
 
 export async function GET() {
   const session = await getServerSession(authOptions);
-  console.log("sessio_test: ", session)
+  console.log("session_user: ", session)
   if (!session || !session.user) {
     return Response.json('Unauthorized!', { status: 401 });
   }
