@@ -24,7 +24,8 @@ export const myProvider = customProvider({
     'chat-model-small': azure('gpt-4o-mini'),
     'large-model': azure('gpt-4o'),
     'chat-model-reasoning': wrapLanguageModel({
-      model: fireworks('accounts/fireworks/models/deepseek-r1'),
+      // model: fireworks('accounts/fireworks/models/deepseek-r1'),
+      model: azure('gpt-4o'),
       middleware: extractReasoningMiddleware({ tagName: 'think' }),
     }),
     'title-model': azure('gpt-4o'),

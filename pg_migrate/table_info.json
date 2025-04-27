@@ -1,0 +1,184 @@
+[
+{
+    "table_name": "User",
+    "columns": [
+      {
+        "name": "id",
+        "type": "uuid",
+        "constraints": ["pk"]
+      },
+      {
+        "name": "name",
+        "type": "varchar(64)"
+      },
+      {
+        "name": "type",
+        "type": "varchar(64)"
+      },
+      {
+        "name": "email",
+        "type": "varchar(64)"
+      },
+      {
+        "name": "password",
+        "type": "varchar(64)"
+      }
+    ]
+  },
+
+  {
+    "table_name": "Message",
+    "columns": [
+      {
+        "name": "id",
+        "type": "uuid",
+        "constraints": ["pk"]
+      },
+      {
+        "name": "chatId",
+        "type": "uuid",
+        "constraints": ["fk"]
+      },
+      {
+        "name": "role",
+        "type": "varchar"
+      },
+      {
+        "name": "content",
+        "type": "json"
+      },
+      {
+        "name": "createAt",
+        "type": "timestamp without time zone"
+      }
+    ]
+  },
+  {
+    "table_name": "Chat",
+    "columns": [
+      {
+        "name": "id",
+        "type": "uuid",
+        "constraints": ["pk"]
+      },
+      {
+        "name": "createdAt",
+        "type": "timestamp without time zone"
+      },
+      {
+        "name": "useId",
+        "type": "uuid",
+        "constraints": ["fk"]
+      },
+      {
+        "name": "title",
+        "type": "text"
+      },
+      {
+        "name": "visibility",
+        "type": "varchar"
+      }
+    ]
+  },
+  {
+    "table_name": "Suggestion",
+    "columns": [
+      {
+        "name": "id",
+        "type": "uuid",
+        "constraints": ["pk"]
+      },
+      {
+        "name": "documentId",
+        "type": "uuid",
+        "constraints": ["fk"]
+      },
+      {
+        "name": "documentCreateAt",
+        "type": "timestamp without time zone",
+        "constraints": ["fk"]
+      },
+      {
+        "name": "originalText",
+        "type": "text"
+      },
+      {
+        "name": "suggestedText",
+        "type": "text"
+      },
+      {
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "name": "isResolved",
+        "type": "boolean"
+      },
+      {
+        "name": "userId",
+        "type": "uuid",
+        "constraints": ["fk"]
+      },
+      {
+        "name": "createdAt",
+        "type": "timestamp without time zone"
+      }
+    ]
+  },
+  {
+    "table_name": "Document",
+    "columns": [
+      {
+        "name": "id",
+        "type": "id",
+        "constraints": ["pk"]
+      },
+      {
+        "name": "createdAt",
+        "type": "timestamp without time zone",
+        "constraints": ["pk"]
+      },
+      {
+        "name": "title",
+        "type": "text"
+      },
+      {
+        "name": "content",
+        "type": "text"
+      },
+      {
+        "name": "userId",
+        "type": "uuid",
+        "constraints": ["fk"]
+      },
+      {
+        "name": "text",
+        "type": "varchar"
+      }
+    ]
+  },
+  {
+    "table_name": "Vote",
+    "columns": [
+      {
+        "name": "chatId",
+        "type": "uuid",
+        "constraints": ["pk"]
+      },
+      {
+        "name": "messageId",
+        "type": "uuid",
+        "constraints": ["pk", "fk"]
+      },
+      {
+        "name": "isUpvoted",
+        "type": "boolean"
+      }
+    ]
+  }
+  
+  
+  
+  
+]
+  
