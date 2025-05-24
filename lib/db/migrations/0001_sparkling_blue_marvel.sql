@@ -6,7 +6,8 @@ CREATE TABLE IF NOT EXISTS "Suggestion" (
 	"suggestedText" text NOT NULL,
 	"description" text,
 	"isResolved" boolean DEFAULT false NOT NULL,
-	"userId" uuid NOT NULL,
+	-- "userId" uuid NOT NULL,
+	"userId" varchar NOT NULL,
 	"createdAt" timestamp NOT NULL,
 	CONSTRAINT "Suggestion_id_pk" PRIMARY KEY("id")
 );
@@ -16,7 +17,8 @@ CREATE TABLE IF NOT EXISTS "Document" (
 	"createdAt" timestamp NOT NULL,
 	"title" text NOT NULL,
 	"content" text,
-	"userId" uuid NOT NULL,
+	-- "userId" uuid NOT NULL,
+	"userId" varchar NOT NULL,
 	CONSTRAINT "Document_id_createdAt_pk" PRIMARY KEY("id","createdAt")
 );
 --> statement-breakpoint

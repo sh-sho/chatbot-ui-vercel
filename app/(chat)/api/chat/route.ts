@@ -5,7 +5,9 @@ import {
   streamText,
 } from 'ai';
 
-import { auth } from '@/app/(auth)/auth';
+// import { auth } from '@/app/(auth)/auth';
+import { getServerSession } from "next-auth/next";
+import { authOptions } from '@/lib/auth/auth';
 import { myProvider } from '@/lib/ai/models';
 import { systemPrompt } from '@/lib/ai/prompts';
 import {
@@ -36,9 +38,11 @@ export async function POST(request: Request) {
   }: { id: string; messages: Array<Message>; selectedChatModel: string } =
     await request.json();
 
-  const session = await auth();
+  const session = await getServerSession(authOptions);
 
   if (!session || !session.user || !session.user.id) {
+
+  // if (!session || !session.user || 'db4ec12f-4339-49fe-99a5-fee97fa68962') {
     return new Response('Unauthorized', { status: 401 });
   }
 
@@ -134,7 +138,7 @@ export async function DELETE(request: Request) {
     return new Response('Not Found', { status: 404 });
   }
 
-  const session = await auth();
+  const session = await getServerSession(authOptions);
 
   if (!session || !session.user) {
     return new Response('Unauthorized', { status: 401 });

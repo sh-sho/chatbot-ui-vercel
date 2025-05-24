@@ -5,23 +5,35 @@ import {
   extractReasoningMiddleware,
   wrapLanguageModel,
 } from 'ai';
+import { createAzure } from '@ai-sdk/azure';
+
+const azure = createAzure({
+  resourceName: process.env["AZURE_RESOURCE_NAME"], 
+  apiKey: process.env["AZURE_OPENAI_API_KEY"],
+});
+
+const azure_image = createAzure({
+  resourceName: process.env["AZURE_RESOURCE_NAME_IMAGE"], 
+  apiKey: process.env["AZURE_OPENAI_API_KEY_IMAGE"],
+});
 
 export const DEFAULT_CHAT_MODEL: string = 'chat-model-small';
 
 export const myProvider = customProvider({
   languageModels: {
-    'chat-model-small': openai('gpt-4o-mini'),
-    'chat-model-large': openai('gpt-4o'),
+    'chat-model-small': azure('gpt-4o-mini'),
+    'large-model': azure('gpt-4o'),
     'chat-model-reasoning': wrapLanguageModel({
-      model: fireworks('accounts/fireworks/models/deepseek-r1'),
+      // model: fireworks('accounts/fireworks/models/deepseek-r1'),
+      model: azure('gpt-4o'),
       middleware: extractReasoningMiddleware({ tagName: 'think' }),
     }),
-    'title-model': openai('gpt-4-turbo'),
-    'artifact-model': openai('gpt-4o-mini'),
+    'title-model': azure('gpt-4o'),
+    'artifact-model': azure('gpt-4o'),
   },
   imageModels: {
-    'small-model': openai.image('dall-e-2'),
-    'large-model': openai.image('dall-e-3'),
+    'small-model': azure_image.imageModel('dall-e-3'),
+    'large-model': azure_image.imageModel('dall-e-3'),
   },
 });
 
