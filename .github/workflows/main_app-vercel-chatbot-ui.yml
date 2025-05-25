@@ -28,10 +28,10 @@ jobs:
           npm install
           npm run build --if-present
           npm run test --if-present
-          rm -rf ./.next/cache
+          # rm -rf ./.next/cac
 
       - name: Zip artifact for deployment
-        run: zip release.zip ./* .next -qr
+        run: zip release.zip ./* -r
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -61,8 +61,5 @@ jobs:
         with:
           app-name: 'app-vercel-chatbot-ui'
           slot-name: 'Production'
-          package: release.zip
+          package: .
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CFAF9A90D245465BB7F2D408D20D389D }}
-
-      - name: Delete zip file
-        run: rm release.zip
