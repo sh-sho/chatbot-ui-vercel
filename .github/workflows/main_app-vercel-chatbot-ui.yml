@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: https://mcr.microsoft.com/
-        username: ${{ secrets.AzureAppService_ContainerUsername_358330c051894866819ba3f885dabc07 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_67c72f6106a24e38b0659fcd5437631b }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_b67868215b3e4cb4851e087556a09764 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_43b6cf9cd56442f0b29f582b340cf91c }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: mcr.microsoft.com/${{ secrets.AzureAppService_ContainerUsername_358330c051894866819ba3f885dabc07 }}/appsvc/staticsite:${{ github.sha }}
+        tags: mcr.microsoft.com/${{ secrets.AzureAppService_ContainerUsername_b67868215b3e4cb4851e087556a09764 }}/appsvc/staticsite:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'app-vercel-chatbot-ui'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_3dc914c2dfb24b84b034706fab2b0b8b }}
-        images: 'mcr.microsoft.com/${{ secrets.AzureAppService_ContainerUsername_358330c051894866819ba3f885dabc07 }}/appsvc/staticsite:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_2c97853c9645491993f307b7d3a49d11 }}
+        images: 'mcr.microsoft.com/${{ secrets.AzureAppService_ContainerUsername_b67868215b3e4cb4851e087556a09764 }}/appsvc/staticsite:${{ github.sha }}'
