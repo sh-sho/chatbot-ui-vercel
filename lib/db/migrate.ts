@@ -6,18 +6,15 @@ import postgres from 'postgres';
 // config({
 //   path: '.env.local',
 // });
-
-config();
-
 const runMigrate = async () => {
   console.log('🌍 All environment variables:', process.env);
   // if (!process.env.POSTGRES_URL) {
-  if (!process.env.APPSETTING_POSTGRES_URL) {
+  if (!process.env.POSTGRES_URL) {
     throw new Error('POSTGRES_URL is not defined');
   }
 
   // const connection = postgres(process.env.POSTGRES_URL, { max: 1 });
-  const connection = postgres(process.env.APPSETTING_POSTGRES_URL, { max: 1 });
+  const connection = postgres(process.env.POSTGRES_URL, { max: 1 });
   const db = drizzle(connection);
 
   console.log('⏳ Running migrations...');
