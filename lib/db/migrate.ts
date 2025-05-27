@@ -6,8 +6,6 @@ import postgres from 'postgres';
 // config({
 //   path: '.env.local',
 // });
-let env = config();
-console.log('🌍 Loaded environment variabless:', env);
 
 const runMigrate = async () => {
   console.log('🌍 All environment variables:', process.env);
