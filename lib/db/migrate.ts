@@ -7,6 +7,8 @@ import postgres from 'postgres';
 //   path: '.env.local',
 // });
 
+config();
+
 const runMigrate = async () => {
   console.log('🌍 All environment variables:', process.env);
   // if (!process.env.POSTGRES_URL) {
