@@ -3,11 +3,12 @@ import { drizzle } from 'drizzle-orm/postgres-js';
 import { migrate } from 'drizzle-orm/postgres-js/migrator';
 import postgres from 'postgres';
 
-// config({
-//   path: '.env.local',
-// });
+config({
+  path: '.env.local',
+});
 
 const runMigrate = async () => {
+  console.log('🌍 All environment variables:', process.env);
   // if (!process.env.POSTGRES_URL) {
   if (!process.env.POSTGRESQLCONNSTR_POSTGRES_URL) {
     throw new Error('POSTGRES_URL is not defined');
