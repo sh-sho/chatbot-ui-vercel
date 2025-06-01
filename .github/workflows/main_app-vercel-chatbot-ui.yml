@@ -65,4 +65,3 @@ jobs:
       
       - name: Delete zip file
         run: rm release.zip
-
