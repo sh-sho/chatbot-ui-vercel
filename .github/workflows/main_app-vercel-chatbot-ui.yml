@@ -25,7 +25,7 @@ jobs:
 
       - name: npm install, build, and test
         run: |
-          npm install --verbose
+          npm install
           npm run build --if-present
           npm run test --if-present
 
@@ -60,6 +60,9 @@ jobs:
         with:
           app-name: 'app-vercel-chatbot-ui'
           slot-name: 'Production'
-          package: .
+          package: release.zip
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CFAF9A90D245465BB7F2D408D20D389D }}
+      
+      - name: Delete zip file
+        run: rm release.zip
 
