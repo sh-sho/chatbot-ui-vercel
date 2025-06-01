@@ -36,13 +36,26 @@ jobs:
         with:
           name: node-app
           path: .
-
+    
+  check-secret:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if AZUREAPPSERVICE_PUBLISHPROFILE is set
+        run: |
+          if [ -z "${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CFAF9A90D245465BB7F2D408D20D389D }}" ]; then
+            echo "❌ Secret is NOT set!"
+            exit 1
+          else
+            echo "✅ Secret is set."
+          fi
+  
   deploy:
     runs-on: ubuntu-latest
     needs: build
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      echo 
     
     steps:
       - name: Download artifact from build job
