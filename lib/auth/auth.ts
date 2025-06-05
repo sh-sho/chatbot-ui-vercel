@@ -35,8 +35,8 @@ export const authOptions: NextAuthOptions = {
         // if (token?.accessToken) {
         //     session.accessToken = token.accessToken as string;
         // }
-        console.log("token_test: ", token)
-        console.log("session_test: ", session.user)
+        // console.log("token_test: ", token)
+        // console.log("session_test: ", session.user)
 
         const token_id = jwt.decode(token.accessToken as string)
         if (session.user) {
@@ -54,5 +54,4 @@ export const authOptions: NextAuthOptions = {
     },
     // NextAuthがセッション情報を暗号化する際に使用
     secret: process.env.NEXTAUTH_SECRET,
-    // secret: process.env.AZURE_AD_CLIENT_SECRET,
 };
