@@ -26,11 +26,11 @@ jobs:
       - name: npm install, build
         run: |
           npm install
-          npm run build --if-present
+          npm run build
 
       - name: Zip artifact for deployment
         run: |
-          zip -r release.zip . -x "node_modules/*" ".git/*" "release.zip"
+          zip -r release.zip . -x ".git/*" "release.zip"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
