@@ -11,8 +11,8 @@ export async function GET() {
   }
 
   // biome-ignore lint: Forbidden non-null assertion.
-  // const chats = await getChatsByUserId({ id: session.user.id! });
+  const chats = await getChatsByUserId({ id: session.user.id! });
 
-  const chats = await getChatsByUserId({ id: "db4ec12f-4339-49fe-99a5-fee97fa68962" });
+  // const chats = await getChatsByUserId({ id: "db4ec12f-4339-49fe-99a5-fee97fa68962" });
   return Response.json(chats);
 }

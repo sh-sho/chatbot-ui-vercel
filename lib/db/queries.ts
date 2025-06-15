@@ -346,3 +346,31 @@ export async function updateChatVisiblityById({
     throw error;
   }
 }
+
+export async function createOrUpdateUserFromEntraID({
+  id,
+  email,
+}: {
+  id: string;
+  email: string;
+  password?: string; // Optional, in case you want to set a password
+}) {
+  try {
+    // Check if user already exists
+    const [existingUser] = await db.select().from(user).where(eq(user.id, id));
+    
+    if (existingUser) {
+      // Update existing user
+      return await db
+        .update(user)
+        .set({ email, password: null })
+        .where(eq(user.id, id));
+    } else {
+      // Create new user
+      return await db.insert(user).values({ id, email, password: null });
+    }
+  } catch (error) {
+    console.error('Failed to create or update user from Entra ID in database');
+    throw error;
+  }
+}

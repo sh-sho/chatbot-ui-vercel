@@ -1,6 +1,7 @@
 import type { NextAuthOptions } from "next-auth"
 import jwt from 'jsonwebtoken'
 import AzureADProvider from "next-auth/providers/azure-ad"
+import { createOrUpdateUserFromEntraID } from "../db/queries";
 
 
 // NextAuth の設定オプション
@@ -35,8 +36,9 @@ export const authOptions: NextAuthOptions = {
         // if (token?.accessToken) {
         //     session.accessToken = token.accessToken as string;
         // }
-        // console.log("token_test: ", token)
-        // console.log("session_test: ", session.user)
+        console.log("token_test: ", token)
+        console.log("session_test: ", session.user)
+        console.log("session_session: ", session)
 
         const token_id = jwt.decode(token.accessToken as string)
         if (session.user) {
@@ -44,6 +46,10 @@ export const authOptions: NextAuthOptions = {
             // session.user.id = token.sub as string;
             if (token_id && typeof token_id === 'object' && 'oid' in token_id) {
                 session.user.id = token_id.oid as string;
+                await createOrUpdateUserFromEntraID({
+                    id: token_id.oid as string,
+                    email: session.user.email as string,
+                });
               }
           }
         return session;
