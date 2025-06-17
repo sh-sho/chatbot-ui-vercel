@@ -116,6 +116,7 @@ function PureMultimodalInput({
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploadQueue, setUploadQueue] = useState<Array<string>>([]);
+  const [isComposing, setIsComposing] = useState(false);
 
   const submitForm = useCallback(() => {
     window.history.replaceState({}, '', `/chat/${chatId}`);
@@ -242,7 +243,7 @@ function PureMultimodalInput({
         rows={2}
         autoFocus
         onKeyDown={(event) => {
-          if (event.key === 'Enter' && !event.shiftKey) {
+          if (event.key === 'Enter' && !event.shiftKey && !isComposing) {
             event.preventDefault();
 
             if (isLoading) {
@@ -252,6 +253,8 @@ function PureMultimodalInput({
             }
           }
         }}
+        onCompositionStart={() => setIsComposing(true)}
+        onCompositionEnd={() => setIsComposing(false)}
       />
 
       <div className="absolute bottom-0 p-2 w-fit flex flex-row justify-start">
